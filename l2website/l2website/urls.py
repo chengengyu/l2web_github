@@ -10,6 +10,8 @@ from holiday.export import *
 from django.contrib import admin
 admin.autodiscover()
 
+
+#配置处理各种链接的函数，用正则表达式进行匹配，大部分是准确匹配，个别连接只匹配最后的单词
 urlpatterns = patterns('',
     # Examples:
     #url(r'^$', 'l2website.views.home', name='home'),
@@ -17,9 +19,11 @@ urlpatterns = patterns('',
 
     url(r'^admin/', include(admin.site.urls)),
     (r'^$', login_home),
+    #结尾为home的链接都调用此函数处理
     (r'home/$', login_home),
     (r'^accounts/login/home/$', login_home),
     (r'^accounts/login/$', login_home),      
+    #设置修改密码的界面，并配置修改成功后的重定向界面
     (r'^accounts/changpass/$', password_change, {'post_change_redirect': '/accounts/login/home/'}),
     (r'^accounts/logout/$', logout, {'next_page': '/accounts/login'}),
     (r'^apply_reward/$', apply_reward),

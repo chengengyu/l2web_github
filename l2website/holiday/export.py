@@ -13,13 +13,18 @@ import xlwt
 from holiday.views import * 
 
 
-
+'''
+默认的格式
+'''
 styles = {'datetime': xlwt.easyxf(num_format_str='yyyy-mm-dd hh:mm:ss'),
           'date': xlwt.easyxf(num_format_str='yyyy-mm-dd'),
           'time': xlwt.easyxf(num_format_str='hh:mm:ss'),
           'header': xlwt.easyxf('font: name Times New Roman, color-index black, bold on', num_format_str='#,##0.00'),
           'default': xlwt.Style.default_style}
 
+'''
+保存个人信息的excel
+'''
 @login_required
 def save_xls_person_info(request, username):
     person = Person.objects.get(name=username)
@@ -122,6 +127,10 @@ def save_xls_person_info(request, username):
     wb.save(response)  
     return response  
 
+'''
+保存倒休申请的excel
+'''
+
 @login_required
 def save_xls_rewards(request, rewards):
     wb = xlwt.Workbook(encoding = 'utf-8')
@@ -157,6 +166,9 @@ def save_xls_rewards(request, rewards):
     wb.save(response)  
     return response  
 
+'''
+保存倒休使用的excel
+'''
 @login_required
 def save_xls_applications(request, applications):
     wb = xlwt.Workbook(encoding = 'utf-8')
@@ -192,7 +204,9 @@ def save_xls_applications(request, applications):
     wb.save(response)  
     return response  
 
-
+'''
+根据搜索内容来生成对应的excel
+'''
 @login_required
 @csrf_protect
 def save_xls_my_info(request):
@@ -206,6 +220,10 @@ def save_xls_my_info(request):
         else:
             return no_permission(request)
 
+'''
+根据搜索类型和关键词进行查找对应的对象，并调用生成函数，来生成excel
+
+'''
 def save_xls_search(request):
     if request.method == "POST":
         search_type = request.POST['search_type']

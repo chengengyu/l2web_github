@@ -5,6 +5,22 @@ from django.core.mail import EmailMessage
 from django.template import loader
 from holiday.models import Application, Reward, Person, ApplicationRollback
 
+
+
+'''
+发送html格式的邮件的函数，调用django库中的函数进行html文本的生成。模板放在temlpate里。
+'''
+
+def send_notify(subject, email_to, message_type, context_type, context):
+    html_content = loader.render_to_string('mail/mail_context.html', {'message_type': message_type, context_type: context})
+    msg = EmailMessage(subject, html_content, email_from, email_to)
+    msg.content_subtype = "html"
+    #失败后不进行任何处理，外面调用者根据返回值来进行提醒。
+    return msg.send(fail_silently=True)
+    
+'''
+使用html格式邮件时的测试函数，本来都是都单独设置的模板，后来换成了通用的模板
+'''
 def send_html_mail(request):
     person_apply = Person.objects.get(name=request.user.username)
     html_content = loader.render_to_string('mail/mail_reward.html', {'person': person_apply})
@@ -12,20 +28,21 @@ def send_html_mail(request):
     msg.content_subtype = "html"
     msg.send()
 
-def send_notify(subject, email_to, message_type, context_type, context):
-    html_content = loader.render_to_string('mail/mail_context.html', {'message_type': message_type, context_type: context})
-    msg = EmailMessage(subject, html_content, email_from, email_to)
-    msg.content_subtype = "html"
-    return msg.send(fail_silently=True)
-    
-    
+'''
+最初的send_mail函数，直接调用系统的函数，只是为了使用异常处理，所以才又封装了一下
+'''
 def send_email(subject, message, email_to):
     try:
         send_mail(subject, message, email_from, email_to, fail_silently=False)
         return True
     except:
         return False
-    
+
+
+
+'''
+最早的发送通知邮件的函数，只能简单的设置发送的正文和标题，因为需要发送表格，所以废弃了此函数
+'''
 def send_email_apply_application(email_to, message_type='approve', subject_type='reward', name=''):
     if message_type == 'apply': 
         if subject_type == 'reward':    

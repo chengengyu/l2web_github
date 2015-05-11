@@ -96,7 +96,6 @@ LOGIN_REDIRECT_URL = 'home/'
 
 SESSION_EXPIRE_AT_BROWSER_CLOSE =  True
 
-'''
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
@@ -107,24 +106,3 @@ EMAIL_PORT = 587
 approve_mail_list = ['cgy008@gmail.com']
 email_from = 'cgy008@gmail.com'
 http_addr = 'http://localhost:8000/accounts/login/home/'
-'''
-
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.datangmobile.cn'
-EMAIL_HOST_USER = 'chengengyu'
-EMAIL_HOST_PASSWORD = 'new.4321'
-EMAIL_PORT = 587
-
-approve_mail_list = ['yuanzejia@datangmobile.cn']
-email_from = 'chengengyu@datangmobile.cn'
-http_addr = 'http://172.27.196.43:8000/'
-
-reward_reason_choices = (
-                         ('工作负荷高', '工作负荷高',),
-                         ('团队活动突出', '团队活动突出',),
-                         ('出差', '出差',),
-                         ('专项支持', '专项支持',),
-                         ('工作业绩突出', '工作业绩突出',),
-                         ('法定假日加班', '法定假日加班',),
-                        )
