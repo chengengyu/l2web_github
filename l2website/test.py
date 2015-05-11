@@ -4,10 +4,6 @@ from django_excel_templates.color_converter import *
 from models import *
 from django.http import HttpResponse
 
-
-'''
-保存了一些看到的模板函数
-'''
 def xls_simple(request):
 
     ## Simple ##

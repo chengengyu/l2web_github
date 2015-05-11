@@ -1,10 +1,5 @@
 ﻿python manage.py shell
 
-
-
-'''
-进行批量往数据库添加对象的脚本
-'''
 from django.contrib.auth.models import User, Group
 from holiday.models import Person
 

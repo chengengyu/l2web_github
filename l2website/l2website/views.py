@@ -11,10 +11,7 @@ from django.contrib.auth.views import login
 @login_required
 def hello(request):
     return HttpResponse("hello world")
-'''
-目前的base 模板中根据了是否有权限来选择是否显示导航栏，所以有可能出现已经登陆的时候回到登陆界面的情况，此时就会很怪异的即显示登陆的输入框，又显示导航栏，
-所以讲登陆界面和登陆后的界面统一一个函数里，如果已经登录过则返回导航的界面，否则再进入调用django的登录界面
-'''
+
 
 def login_home(request):
     if request.user.is_authenticated():
@@ -23,9 +20,7 @@ def login_home(request):
     else:
         return login(request)
 
-'''
-以下为练习中的测试函数
-'''
+
 
 def current_datetime(request):
     now = datetime.datetime.now()
