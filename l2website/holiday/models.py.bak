@@ -1,0 +1,68 @@
+from django.db import models
+
+# Create your models here.
+
+'''
+记录每个人的数据库，这里在代码中并没有和登陆时的用户名进行绑定，但是在使用上是和name进行绑定处理
+此处数据库中的数字设置为10进制实数，允许3位小数点前，1位小数点后，主要是为了满足申请半天倒休的需求
+'''    
+class Person(models.Model):
+    name = models.CharField(max_length=30, unique=True)
+    chinese_name = models.CharField(max_length=30)
+    email = models.EmailField()
+    holidayNum = models.DecimalField(max_digits=4, decimal_places=1,default=0)
+    holidayNumSum = models.DecimalField(max_digits=4, decimal_places=1,default=0)
+    holidayNumUsed = models.DecimalField(max_digits=4, decimal_places=1,default=0)
+    groupname = models.CharField(max_length=30)
+    class Meta:
+        permissions = (
+            ("apply_reward", "申请倒休的权利"),
+            ("apply_application", "申请使用倒休的权利"),
+            ("approve", "审批的权利"),
+        )
+    def __unicode__(self):
+        return self.name
+'''
+记录使用倒休的数据库，
+依次为：原因，申请天数，批准天数，申请使用的起始日期，申请使用的结束日期，申请人，审批人
+'''    
+class Application(models.Model):
+    reason = models.TextField(max_length=100)
+    days_apply =  models.DecimalField(max_digits=4, decimal_places=1,default=0)
+    days_approve = models.DecimalField(max_digits=4, decimal_places=1,default=0)
+    date_apply = models.DateField(auto_now_add=True)
+    date_start = models.DateField()
+    date_end = models.DateField()
+    apply_application = models.ForeignKey(Person, related_name='apply_application')
+    approve_application = models.ForeignKey(Person, blank=True, related_name='approve_application')
+    approve_flag = models.BooleanField(default=False)
+    
+    def __unicode__(self):
+        return self.apply_application.name
+'''
+记录申请倒休的数据库，
+依次为：原因，申请天数，批准天数，申请人，奖励人，审批人
+'''
+class Reward(models.Model):
+    reason = models.TextField(max_length=100)
+    days_apply =  models.DecimalField(max_digits=4, decimal_places=1,default=0)
+    days_approve = models.DecimalField(max_digits=4, decimal_places=1,default=0)
+    date_apply = models.DateField(auto_now_add=True)
+    apply_reward = models.ForeignKey(Person, related_name='apply_reward')
+    reward_reward = models.ForeignKey(Person, related_name='reward_reward')
+    approve_reward = models.ForeignKey(Person, blank=True, related_name='approve_reward')
+    approve_flag = models.BooleanField(default=False)
+    
+    def __unicode__(self):
+        return self.apply_reward.name
+
+
+class ApplicationRollback(models.Model):
+    reason = models.TextField(max_length=100)
+    days_apply =  models.DecimalField(max_digits=4, decimal_places=1,default=0)
+    apply_rollback = models.ForeignKey(Person, related_name='apply_reward')
+    approve_rollback = models.ForeignKey(Person, blank=True, related_name='approve_reward')
+    approve_flag = models.BooleanField(default=False)
+    
+    def __unicode__(self):
+        return self.apply_rollback.name

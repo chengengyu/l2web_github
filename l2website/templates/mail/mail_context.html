@@ -1,0 +1,95 @@
+﻿{% extends "mail/mail_base.html" %}
+{% block content %}
+	{% if message_type == 'apply' %}
+		<p>新的申请需要您审批：</p>
+  {% else %}
+  	<p>您的申请已审批结束：</p>
+  {% endif %}
+  
+  {% if reward %}
+  	<h2>倒休申请<h2/>
+		<table border="1">
+		 <tr>
+		    <th>申请人</th>
+		    <th>申请日期</th>
+		    <th>倒休人</th>
+		    <th>资源组</th>  
+		    <th>倒休原因</th>
+		    <th>备注</th>
+		    <th>倒休时长（单位:天）</th>
+		    {% if message_type != 'apply' %}
+		    <th>审批结果（单位:天）</th>
+		    {% endif %}
+		  </tr>
+		  <tr>
+		  	<td>{{ reward.apply_reward.chinese_name }}</td>
+		    <td>{{ reward.date_apply }}</td>
+		    <td>{{ reward.reward_reward.chinese_name }}</td>
+		    <td>{{ reward.reward_reward.groupname }}</td>
+		    <td>{{ reward.type }}</td>
+		    <td>{{ reward.reason }}</td>
+		    <td>{{ reward.days_apply }}</td>
+		    {% if message_type != 'apply' %}
+		    <td>{{ reward.days_approve }}</td>
+		    {% endif %}
+		  </tr>
+		</table>
+	{% endif %}
+	
+	{% if application %}
+		<h2>倒休使用<h2/>
+		<table border="1">
+		 <tr>
+		    <th>申请人</th>
+		    <th>申请日期</th>
+		    <th>起始日期</th>
+		    <th>结束日期</th>
+		    <th>资源组</th>  
+		    <th>倒休原因</th>
+		    <th>倒休时长（单位:天）</th>
+		    {% if message_type != 'apply' %}
+		    <th>审批结果（单位:天）</th>
+		    {% endif %}
+		  </tr>
+		  <tr>
+		    <td>{{ application.apply_application.chinese_name }}</td>
+		    <td>{{ application.date_approve }}</td>		 
+		    <td>{{ application.date_start }}, {{ application.start_meridiem }}</td>
+		    <td>{{ application.date_end }}, {{ application.end_meridiem }}</td>
+		    <td>{{ application.apply_application.groupname }}</td>
+		    <td>{{ application.reason }}</td>
+		    <td>{{ application.days_apply }}</td>
+		    {% if message_type != 'apply' %}
+		    <td>{{ application.days_approve }}</td>
+		    {% endif %}
+		  </tr>
+		</table>
+	{% endif %}
+	
+	{% if rollback %}
+		<h2>倒休取消<h2/>
+		<table border="1">
+		 <tr>
+		    <th>申请人</th>
+		    <th>申请日期</th> 
+		    <th>资源组</th>  
+		    <th>取消原因</th>
+		    <th>取消时长（单位:天）</th>
+		    {% if message_type != 'apply' %}
+		    <th>审批结果（单位:天）</th>
+		    {% endif %}
+		  </tr>
+		  <tr>
+		    <td>{{ rollback.apply_rollback.chinese_name }}</td>
+		    <td>{{ rollback.date_approve }}</td>
+		    <td>{{ rollback.apply_rollback.groupname }}</td>
+		    <td>{{ rollback.reason }}</td>
+		    <td>{{ rollback.days_apply }}</td>
+		    {% if message_type != 'apply' %}
+		    <td>{{ rollback.days_approve }}</td>
+		    {% endif %}
+		  </tr>
+		</table>
+	{% endif %}
+	<p>详情请您登陆  http://172.27.196.43:8000</p>
+{% endblock %}

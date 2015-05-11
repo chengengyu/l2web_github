@@ -1,0 +1,81 @@
+﻿{% extends "base.html" %}
+{% block title %}
+个人信息
+{% endblock %}
+{% block content %}
+	<h2> {{ person.chinese_name }},你申请过的倒休如下：</h2>
+		{% if rewards|length != 0 %}
+			<h3>你共有{{ rewards|length }}个申请</h3>
+				<table class="show_my">
+				<tr>
+			 		<th>倒休人</th>
+			    <th>申请日期</th>
+			    <th>倒休原因</th>
+			    <th class="text">备注</th>
+			    <th>倒休时长（单位:天）</th>
+			    <th>审批结果（单位:天）</th>
+			    <th>审批日期</th>
+			    <th>是否通过审批</th>
+			  </tr>
+				{% for reward in rewards %}
+						
+						  <tr {% if forloop.counter|divisibleby:2 %} class="odd"{% endif %}>
+						  	<td>{{ reward.reward_reward.chinese_name }}</td>
+						    <td>{{ reward.date_apply }}</td>		    
+						    <td>{{ reward.type }}</td>
+						    <td class="text">{{ reward.reason }}</td>
+						    <td>{{ reward.days_apply }}</td>
+						    <td>{{ reward.days_approve }}</td>
+						    <td>{{ reward.date_apply }}</td>
+						    <td>{{ reward.approve_flag }}</td>
+						  </tr>
+
+				<!--
+					<fieldset>
+			   		<table>
+			   			<div>
+								<label class="type" for="type">申请类型:</label>
+									<input type="text" name="type" value="{{ reward.type }}" readonly="readonly"/>
+						  </div>
+			   			<div>
+								<label class="reason" for="reason">申请原因:</label>
+							  	<textarea readonly="readonly"> {{ reward.reason }} </textarea>
+						  </div>
+						  <div>
+							  <label class="days_apply" for="days_apply">申请天数:</label>
+							  	<input type="text" name="days_apply" value="{{ reward.days_apply }}" readonly="readonly"/>
+						  </div>
+						  <div>
+							  <label class="days_approve" for="days_approve">批准天数:</label>
+							  	<input type="text" name="days_approve" value="{{ reward.days_approve }}" readonly="readonly"/>
+			  		  </div>
+			  		  <div>
+				  		  <label class="reward_reward" for="reward_reward">奖励人:</label>
+							  	<input type="text" name="reward_reward" value="{{ reward.reward_reward }}" readonly="readonly"/>
+			  		  </div>
+			  		  <div>
+				  		  <label class="approve_reward" for="approve_reward">审批人:</label>
+							  	<input type="text" name="approve_reward" value="{{ reward.approve_reward }}" readonly="readonly"/>
+		  		  	</div>
+	  		  	  <div>
+				  		  <label class="date_apply" for="date_apply">申请日期:</label>
+							  	<input type="text" name="approve_reward" value="{{ reward.date_apply }}" readonly="readonly"/>
+		  		  	</div>
+		  		  	<div>
+				  		  <label class="date_apply" for="date_apply">审批日期:</label>
+							  	<input type="text" name="approve_reward" value="{{ reward.date_approve }}" readonly="readonly"/>
+		  		  	</div>
+		  		  	<div>
+				  		  <label class="approve_flag" for="approve_flag">是否通过审批:</label>
+							  	<input type="Text" name="approve_flag" value="{{ reward.approve_flag }}" readonly="readonly"/>
+		  		  	</div>
+		  		  </table>
+					</fieldset>
+					-->
+				{% endfor %}
+				</table>
+		{% else %}
+			<h3>没有申请记录</h3>
+		{% endif %}
+		
+{% endblock %}

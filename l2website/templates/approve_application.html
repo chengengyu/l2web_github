@@ -1,0 +1,52 @@
+﻿{% extends "base.html" %}
+	{% block title %}
+		审批倒休使用
+	{% endblock %}
+	{% block content %}
+		<h2>审批倒休使用</h2>
+	{% if Applications|length != 0 %}
+	    <p>有{{ Applications|length }}个申请.</p>	 
+	    <fieldset class="approve_field">
+	    
+	   	<form action="" method="post">{% csrf_token %}	
+	   		<table class="approve">
+					<tr>
+						<th class="name">申请人</th>	
+				    <th>申请日期</th>	   
+				    <th class="text">申请原因</th>
+				    <th>开始日期</th>
+				    <th>结束日期</th>
+				    <th class="num">申请天数</th> 
+				    <th class="num">批准天数</th>
+				    <th class="check">审批</th>
+				  </tr>
+		   		{{ Applications.management_form }}
+		   		{% for application in Applications %}
+		   				{{ application.errors }}
+		        	<tr {% if forloop.counter|divisibleby:2 %} class="odd"{% endif %}>
+						    <td class="name">{{ application.apply_application }}</td>			
+						    <td>{{ application.date_approve }}</td>		  					    				    
+						    <td class="text">{{ application.reason }}</td>	    
+						    <td>{{ application.date_start }} {{ application.start_meridiem }}</td>
+						    <td>{{ application.date_end }} {{ application.end_meridiem }}</td>
+						    <td class="num">{{ application.days_apply }}</td>  	
+						    <td class="num">{{ application.days_approve }}</td>
+						    <td class="check">{{ application.approve_flag }}</td>
+						  </tr>
+		        	{{ application.id }}
+		        	{{ application.approve_application }}	
+					{% endfor %}	
+							
+					</table>
+				<div>
+					<input type="submit" value="提交" />
+				</div>
+				<br>
+			</form>
+			
+			</fieldset>
+	{% else %}
+	    <p>没有申请待审批</p>
+	{% endif %}
+	
+	{% endblock %}

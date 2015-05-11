@@ -1,0 +1,63 @@
+﻿{% extends "base.html" %}
+	{% block title %}
+		使用倒休
+	{% endblock %}
+
+	{% block content %}
+		<h2>使用倒休</h2>
+		
+		{% if person.holidayNum == 0 %}
+			 <p>抱歉，你当前没有可用倒休</p>
+		{% else %}
+			
+			{% if form.errors %}
+				<p style="color: red;">
+					表单有误。
+				</p>
+			{% endif %}
+			<fieldset>
+			<form action="" method="post">{% csrf_token %}
+				
+					<div>
+					  <label class="required" for="holidayNum">可用倒休天数:</label> 
+					  {{person.holidayNum}}，
+					  <label class="required" for="holidayNum">待审批的倒休使用天数:</label> 
+					  {{days_tobe_approve}}
+		  		</div>
+					<div>				
+					  <label class="required" for="reason">事由:</label>  
+					  {{ form.reason.errors }}
+				  	{{ form.reason }}
+				  </div>
+				  
+				  <div>
+				  	
+					  <label class="required" for="days_apply">申请天数(以半天为单位):</label> 
+					  {{ form.days_apply.errors }}
+					    <input id="days_apply" name="days_apply" step="0.5" type="number" value="1" min="0.5" max="{{person.holidayNum}}">
+				  </div>
+		  
+				  <div>	  	
+						<label for="date_start">起始日期:</label>
+						{{ form.date_start.errors }}
+						{{ form.start_meridiem.errors }}
+						{{ form.date_start}}
+						{{ form.start_meridiem}}
+					</div>
+					
+					<div> 	
+						<label for="date_end">结束日期:</label>
+						{{ form.date_end.errors }}
+						{{ form.end_meridiem.errors }}
+						{{ form.date_end}}
+						{{ form.end_meridiem}}
+					</div>
+				<br>
+				<div>
+					<input type="submit" value="提交" />
+				</div>
+				
+			</form>
+			</fieldset>
+		{% endif %}
+	{% endblock %}

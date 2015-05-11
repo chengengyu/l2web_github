@@ -1,0 +1,9 @@
+eclipse.preferences.version=1
+encoding//holiday/email.py=UTF-8
+encoding//holiday/export.py=UTF-8
+encoding//holiday/forms.py=UTF-8
+encoding//holiday/models.py=UTF-8
+encoding//holiday/views.py=UTF-8
+encoding//l2website/urls.py=gb18030
+encoding//l2website/views.py=gb18030
+encoding/<project>=UTF-8

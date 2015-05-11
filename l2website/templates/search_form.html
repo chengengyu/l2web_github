@@ -1,0 +1,25 @@
+﻿{% extends "base.html" %}
+{% block title %}
+搜索
+{% endblock %}
+{% block content %}
+    {% if errors %}
+        <ul class="search_error">
+            {% for error in errors %}
+            	<li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <form action="/search/" method="post">{% csrf_token %}
+    		<select name="search_type">
+				  <option value="apply_name" selected="selected">申请姓名</option>
+				  <option value="apply_reward_time">倒休申请(申请时间)</option>
+				  <option value="apply_application_time">倒休使用(起始时间)</option>
+				  <option value="person_name">个人信息</option>
+				</select> 
+        <input type="text" name="search_string">
+        <input type="submit" value="搜索">
+    </form>
+    <p>按名字搜索时请输入确认的名字拼音，按时间搜索时请输入年份+月份即可，如：查询2014年8月，则输入201408</p>
+{% endblock %}

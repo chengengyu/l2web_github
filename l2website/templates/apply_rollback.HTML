@@ -1,0 +1,33 @@
+﻿{% extends "base.html" %}
+	{% block title %}
+		申请取消倒休
+	{% endblock %}
+	
+	{% block content %}
+		<h2>申请取消倒休</h2>
+		{% if form.errors %}
+			<p style="color: red;">
+				表单有误。
+			</p>
+		{% endif %}
+		<fieldset>
+		<form action="" method="post">{% csrf_token %}
+			
+				
+				<div>				
+				  <label class="required" for="reason">取消原因（请注明申请的日期）:</label>  
+					{{ form.reason.errors }}
+			  	{{ form.reason }}
+			  </div>			  
+			  <div>	  	
+				  <label class="required" for="days_apply">取消的天数(以半天为单位):</label> 
+				  {{ form.days_apply.errors }}
+				  {{ form.days_apply }}
+			  </div>
+			<br>	  	
+			<div>
+				<input type="submit" value="提交" />
+			</div>			
+		</form>
+		</fieldset>
+	{% endblock %}

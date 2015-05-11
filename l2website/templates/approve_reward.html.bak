@@ -1,0 +1,53 @@
+﻿{% extends "base.html" %}
+	{% block title %}
+		审批倒休申请
+	{% endblock %}
+	{% block content %}
+		<h2>审批倒休申请</h2>
+	{% if Rewards|length != 0 %}
+	    <p>有{{ Rewards|length }} 申请.</p>
+	    <fieldset class="approve_field">    
+	   	<form action="" method="post">{% csrf_token %}	
+	   		<table class="approve">
+					<tr>
+						<th class="name">申请人</th>
+						<th class="name">倒休人</th>	
+				    <th>申请日期</th>
+				    <th class="type">倒休原因</th>	   
+				    <th class="text">备注</th>
+				    <th class="num">倒休时长</th> 
+				    <th class="num">批准天数</th>
+				    <th class="check">审批</th>
+				  </tr>
+		   		{{ Rewards.management_form }}
+		   		{% for Reward in Rewards %}
+		   				{{ Reward.errors }}
+		        	<tr {% if forloop.counter|divisibleby:2 %} class="odd"{% endif %}>
+						    <td class="name">{{ Reward.apply_reward }}</td>			
+						    <td class="name">{{ Reward.reward_reward }}</td>	
+						    <!--因为申请日期是自动填写的，用django的formset
+						    		处理时显示不出来，所以在未审批时用审批日期存储了申请日期  -->
+						    <td>{{ Reward.date_approve }}</td>	 
+						    <td>{{ Reward.type }}</td> 					    				    
+						    <td class="text">{{ Reward.reason }}</td>	    
+						    <td class="num">{{ Reward.days_apply }}</td>  	
+						    <td class="num">{{ Reward.days_approve }}</td>
+						    <td class="check">{{ Reward.approve_flag }}</td>
+						  </tr>
+		        	{{ Reward.id }}
+		        	{{ Reward.approve_reward }}	
+					{% endfor %}	
+							
+					</table>
+				<div>
+					<input type="submit" value="提交" />
+				</div>
+				<br>
+			</form>
+			</fieldset>
+			
+	{% else %}
+	    <p>没有申请待审批</p>
+	{% endif %}
+	
+	{% endblock %}

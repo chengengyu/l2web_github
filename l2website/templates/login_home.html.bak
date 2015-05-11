@@ -1,0 +1,30 @@
+﻿{% extends "base.html" %}
+{% block title %}
+L2 WEB 
+{% endblock %}
+{% block content %}
+
+	<h2 class="welcome"> {{ person.chinese_name }},欢迎你再次登录，您的个人信息如下：</h2>
+			<table class="show_my" id="welcome">
+				 <tr>
+				 		<th>共有倒休</th>
+				 		<th>已用倒休</th>
+				    <th>剩余倒休</th>				    
+				  </tr>
+				  <tr>
+				  	<td>{{ person.holidayNumSum }}</td>
+				  	<td>{{ person.holidayNumUsed }}</td>
+				  	<td>{{ person.holidayNum }}</td>			    				    
+				  </tr>
+			</table>
+	
+	{% if messages %}
+		<ul class="messages">
+		    {% for message in messages %}
+		    {% if message.tags == 'error' %} <li style="color: red;" class="{{ message.tags }}">{{ message}}</li>{% endif %}
+		    {% if message.tags == 'success' %} <li style="color: green;" class="{{ message.tags }}">{{ message }}</li>{% endif %}
+		    {% endfor %}
+		</ul>
+	{% endif %}
+
+{% endblock %}

@@ -1,0 +1,30 @@
+﻿<div class="nav">
+	<ul class="">
+	{% if perms.holiday.apply_reward %}
+	<div id="mortal">
+		<li><a href="/apply_reward/">申请倒休</a></li>
+		<li><a href="/show_my_apply_reward/">查看我的倒休申请</a></li>
+		<li><a href="/accounts/changpass/">修改密码</a></li>
+	</div>
+	{% endif %}
+	
+	{% if perms.holiday.apply_application %}
+	<div id="hero">
+		<li><a href="/apply_application/">使用我的倒休</a></li>
+		<li><a href="/apply_rollback/">取消倒休使用</a></li>
+		<li><a href="/show_my_info/">查看我的记录</a></li>
+	</div>
+	{% endif %}
+	
+	{% if perms.holiday.approve %}
+	<div id="titan">
+		<li><a href="/approve_reward/">审批倒休申请</a></li>
+		<li><a href="/approve_application/">审批倒休使用</a></li>
+		<li><a href="/approve_rollback/">审批倒休取消</a></li>
+		<li><a href="/search_form/">搜索</a></li>
+		<li><a href="/admin/">进入管理员界面</a></li>
+	</div>
+	{% endif %}
+	</ul>
+
+</div>

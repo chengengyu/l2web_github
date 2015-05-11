@@ -1,0 +1,59 @@
+﻿{% extends "base.html" %}
+	{% block title %}
+		申请倒休
+	{% endblock %}
+	
+	{% block content %}
+		<h2>申请倒休</h2>
+		{% if form.errors %}
+			<p style="color: red;">
+				表单有误。
+			</p>
+		{% endif %}
+		<fieldset>
+		<form action="" method="post">{% csrf_token %}
+				<div>				
+				  <label class="required" for="type">申请类型:</label>  
+				  {{ form.type.errors }}
+				  <!--                  
+				    <textarea class="vLargeTextField" cols="40" id="reason" name="reason" rows="10"></textarea>
+			  	-->
+			  	{{ form.type }}
+			  </div>
+				<div>
+					
+				  <label class="required" for="reason">申请原因:</label>  
+				  {{ form.reason.errors }}
+				  <!--                  
+				    <textarea class="vLargeTextField" cols="40" id="reason" name="reason" rows="10"></textarea>
+			  	-->
+			  	{{ form.reason }}
+			  </div>
+			  
+			  <div>
+			  	
+				  <label class="required" for="days_apply">申请天数(以半天为单位):</label> 
+				  {{ form.days_apply.errors }}
+				  <!--  
+				    <input id="days_apply" name="days_apply" step="0.5" type="number" value="0">
+				  -->
+				  {{ form.days_apply }}
+			  </div>
+			  
+			  <div>
+			  	
+					<label for="applyname">倒休人(请输入准确的bj域ID):</label>
+					{{ form.applyname.errors }}
+					<!-- 
+						<input id="applyname" name="applyname" type="text"  value="">
+					-->
+					{{ form.applyname}}
+				</div>
+			<br>
+			<div>
+				<input type="submit" value="提交" />
+			</div>
+			
+		</form>
+		</fieldset>
+	{% endblock %}

@@ -1,0 +1,74 @@
+python manage.py sqlall holiday(name) 显示SQL语句
+python manage.py syncdb      同步所有的数据库models
+python manage.py validate	    验证数据库模型设置正确
+
+
+数据库添加字段
+
+>>> from django.db import connection
+
+>>> cursor = connection.cursor()
+
+>>>cursor.execute('ALTER TABLE holiday_application ADD COLUMN approve_flag bool DEFAULT False') 
+
+cursor.execute('ALTER TABLE holiday_person ADD COLUMN groupname varchar(30)') 
+
+cursor.execute('ALTER TABLE holiday_reward ADD COLUMN type varchar(30)') 
+
+cursor.execute('ALTER TABLE holiday_applicationrollback ADD COLUMN days_approve decimal') 
+
+cursor.execute('ALTER TABLE holiday_applicationrollback ADD COLUMN date_apply date') 
+
+cursor.execute('ALTER TABLE holiday_application ADD COLUMN start_meridiem varchar') 
+cursor.execute('ALTER TABLE holiday_application ADD COLUMN end_meridiem varchar')
+
+cursor.execute('ALTER TABLE holiday_application ADD COLUMN date_approve date')
+cursor.execute('ALTER TABLE holiday_applicationrollback ADD COLUMN date_approve date') 
+cursor.execute('ALTER TABLE holiday_reward ADD COLUMN date_approve date') 
+
+
+
+"start_meridiem" varchar(30) NOT NULL,
+                        <label class="required" for="id_days_approve">Days approve:</label>
+                        
+                            <input id="id_days_approve" name="days_approve" step="0.1" type="number" value="0" />
+                            
+                            {'message_type': message_type, 'reward': reward})
+                            
+                            
+                            
+                            
+sql语句修改字段属性
+如果数据量非常大，达到几百万条记录以上，使用企业管理器来更改字段类型，很多时候会超时，更改不成功，这时可以使用Sql语句来更改，如下：
+A、更改字段类型长度
+alter table 表 
+alter column 字段名 类型的长度--varchar(60)
+例：把城市表的城市名字段有原来的长度20改为30
+alter table Testcity 
+alter column cityname varchar(30)
+B、更改字段类型
+alter table 表 
+alter column 字段名 更改后的类型
+例：把城市表的城市名字段有原来的varchar类型改为int类型
+alter table Testcity 
+alter column cityname int
+如果Sno字段原来不为空：
+ ALTER TABLE student alter column Sno varchar(10) not NULL 
+如果Sno字段原来为空：
+ ALTER TABLE student alter column Sno varchar(10) 
+因为不管以前的字段是否允许为空，执行 
+ALTER TABLE student alter column Sno varchar(10)
+后该字段都会变为允许为空。 还有就是执行这类修改操作时最好是空表，如果有数据，可能会失败。因为有些数据类型之间可能不能隐式的转换或者根本就不能转化，比如“abc”要转换成int型。所以，一切还要自己注意控制。
+
+C、添加not null约束 
+alter table 表 alter column 字段名 int not null 
+例：把cid不能输入空值
+alter table Testcity alter column cid int not null 
+D、设置主键 
+alter table 表 add constraint 主键名 primary key(字段名)
+例：把cid设为主键
+alter table Testcity add constraint PK_cid primary key(cid)
+E、更改字段名
+EXEC sp_rename '表名.字段名','更改后的字段名','COLUMN'
+F、添加字段名
+ALTER TABLE 表 ADD 字段名 字段类型 DEFAULT null

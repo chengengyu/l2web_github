@@ -1,0 +1,79 @@
+﻿{% extends "mail/mail_base.html" %}
+{% block content %}
+	{% if message_type == 'apply' %}
+		<p>新的申请需要您审批：</p>
+  {% else %}
+  	<p>您的申请已审批结束：</p>
+  {% endif %}
+  
+  {% if rward %}
+  	<h2>倒休申请<h2/>
+		<table border="1">
+		 <tr>
+		    <th>申请人</th>
+		    <th>申请日期</th>
+		    <th>倒休人</th>
+		    <th>资源组</th>  
+		    <th>倒休原因</th>
+		    <th>备注</th>
+		    <th>倒休时长（单位:天）</th>
+		    <th>审批结果（单位:天）</th>
+		  </tr>
+		  <tr>
+		  	<td>{{ rward.apply_reward.chinese_name }}</td>
+		    <td>{{ rward.date_apply }}</td>
+		    <td>{{ rward.reward_reward.chinese_name }}</td>
+		    <td>{{ rward.reward_reward.groupname }}</td>
+		    <td>{{ rward.type }}</td>
+		    <td>{{ rward.reason }}</td>
+		    <td>{{ rward.days_apply }}</td>
+		    <td>{{ rward.days_approve }}</td>
+		  </tr>
+		</table>
+	{% endif %}
+	
+	{% if application %}
+		<h2>倒休使用<h2/>
+		<table border="1">
+		 <tr>
+		    <th>申请人</th>
+		    <th>起始日期</th>
+		    <th>结束日期</th>
+		    <th>资源组</th>  
+		    <th>倒休原因</th>
+		    <th>倒休时长（单位:天）</th>
+		    <th>审批结果（单位:天）</th>
+		  </tr>
+		  <tr>
+		    <td>{{ application.apply_application.chinese_name }}</td>
+		    <td>{{ application.date_start }}</td>
+		    <td>{{ application.date_end }}</td>
+		    <td>{{ application.apply_application.groupname }}</td>
+		    <td>{{ application.reason }}</td>
+		    <td>{{ application.days_apply }}</td>
+		    <td>{{ application.days_approve }}</td>
+		  </tr>
+		</table>
+	{% endif %}
+	
+	{% if rollback %}
+		<h2>倒休取消<h2/>
+		<table border="1">
+		 <tr>
+		    <th>申请人</th>
+		    <th>资源组</th>  
+		    <th>倒休原因</th>
+		    <th>倒休时长（单位:天）</th>
+		    <th>审批结果（单位:天）</th>
+		  </tr>
+		  <tr>
+		    <td>{{ rollback.apply_rollback.chinese_name }}</td>
+		    <td>{{ application.apply_rollback.groupname }}</td>
+		    <td>{{ application.reason }}</td>
+		    <td>{{ application.days_apply }}</td>
+		    <td>{{ application.days_approve }}</td>
+		  </tr>
+		</table>
+	{% endif %}
+	
+{% endblock %}

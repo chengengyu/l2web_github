@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+	{% block title %}
+		审批倒休申请
+	{% endblock %}
+	{% block content %}
+		<h2>审批倒休申请</h2>
+	{% if Rewards %}
+	    <p>有{{ Rewards|length }} 申请.</p>	    
+	   	<form action="" method="post">{% csrf_token %}
+	   		{% for book in books %}
+					<fieldset>
+						<div>
+						  <label class="required" for="reason">申请原因:</label>                 
+						  <textarea class="vLargeTextField" cols="40" id="reason" name="reason" rows="10", value="{{ book.reason }}"></textarea>
+						  
+						  {{ book.reason }}
+	  
+					  </div>
+	<!--				  
+					  <div>
+						  <label class="required" for="days_apply">申请天数(以半天为单位):</label> 
+						  
+						    <input id="days_apply" name="days_apply" step="0.5" type="number" value="0">
+						  
+						  {{ form.days_apply }}
+					  </div>
+					  
+					  <div>
+					  	{{ form.applyname.errors }}
+							<label class="required" for="applyname">申请者(请输入准确的拼音):</label>
+							
+								<input id="applyname" name="applyname" type="text"  value="">
+							
+							{{ form.applyname}}
+						</div>
+ -->
+					</fieldset>
+				{% endfor %}
+				<div>
+					<input type="submit" value="提交" />
+				</div>
+				<br>
+			</form>
+	{% else %}
+	    <p>没有申请待审批</p>
+	{% endif %}
+	
+	{% endblock %}

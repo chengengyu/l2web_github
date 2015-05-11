@@ -1,0 +1,97 @@
+﻿{% extends "base.html" %}
+{% block title %}
+搜索结果
+{% endblock %}
+{% block content %}
+<fieldset class="show_info">
+	{% if Results|length != 0 %}
+ 		{% if search.type == "apply_name" or search.type = "apply_reward_time"%}
+	 		<h3>{{ search.text }}有{{ Results|length }}条倒休申请记录.</h3>
+			<table class="show_my">
+				<tr>
+					<th>申请人</th>
+			 		<th>倒休人</th>
+			    <th>申请日期</th>
+			    <th>倒休原因</th>
+			    <th class="text">备注</th>
+			    <th>倒休时长（单位:天）</th>
+			    <th>审批结果（单位:天）</th>
+			    <th>审批日期</th>
+			    <th>是否通过审批</th>
+			  </tr>
+				{% for Result in Results %}		
+				  <tr {% if forloop.counter|divisibleby:2 %} class="odd"{% endif %}>
+				  	<td>{{ Result.apply_reward.chinese_name }}</td>
+				  	<td>{{ Result.reward_reward.chinese_name }}</td>
+				    <td>{{ Result.date_apply }}</td>		    
+				    <td>{{ Result.type }}</td>
+				    <td class="text">{{ Result.reason }}</td>
+				    <td>{{ Result.days_apply }}</td>
+				    <td>{{ Result.days_approve }}</td>
+				    <td>{{ Result.date_apply }}</td>
+				    <td>{{ Result.approve_flag }}</td>
+				  </tr>
+				{% endfor %}	
+						
+			</table>
+ 		{% elif search.type = 'person_name' %}
+ 		{% elif search.type = 'apply_application_time' %}
+ 			<h3>{{ search.text }}有{{ Results|length }}条倒休使用记录.</h3>
+				<table class="show_my">
+					<tr>
+						<th>申请人</th>
+				    <th>申请日期</th>	
+				    <th>申请天数（单位:天）</th>    
+				    <th class="text">申请原因</th>
+				    <th>开始日期</th>
+				    <th>结束日期</th>
+				    <th>批准天数（单位:天）</th>
+				    <th>审批日期</th>
+				    <th>是否通过审批</th>
+				  </tr>
+					{% for Result in Results %}
+						<tr {% if forloop.counter|divisibleby:2 %} class="odd"{% endif %}>
+					   	<td>{{ Result.apply_application.chinese_name }}</td>
+					    <td>{{ Result.date_apply }}</td>		  
+					    <td>{{ Result.days_apply }}</td>  					    
+					    <td class="text">{{ Result.reason }}</td>	    
+					    <td>{{ Result.date_start }}</td>
+					    <td>{{ Result.date_end }}</td>
+					    <td>{{ Result.days_approve }}</td>
+					    <td>{{ Result.date_approve }}</td>
+					    <td>{{ Result.approve_flag }}</td>
+					  </tr>
+					{% endfor %}
+				</table>
+ 		{% endif %}
+
+	    
+	    
+    <!--    
+   	<form action="" method="get">{% csrf_token %}
+   		{{ Results.management_form }}		   		
+   		{% for Result in Results %}
+   				<fieldset>
+   					<table>
+        		{{ Result }}
+        		<table>
+					</fieldset>
+			{% endfor %}
+	  </form>
+	  -->
+	  <p>
+			<form action="/save_xls_search/" method="post">{% csrf_token %}
+				<input type="hidden" name="search_text" value="{{ search.text }}" />
+				<input type="hidden" name="search_type" value="{{ search.type }}" />
+				<input type="submit" value="导出到excel">
+			</form>
+		</p>
+
+	{% else %}
+	    <p>没有相关记录</p>
+	{% endif %}
+	<p>
+		<a href="/search_form/">继续搜索</a>
+	</p>
+</fieldset>
+{% endblock %}

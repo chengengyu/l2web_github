@@ -1,0 +1,59 @@
+﻿{% extends "base.html" %}
+{% block title %}
+L2 WEB 
+{% endblock %}
+{% block content %}
+{% if messages %}
+	<ul class="messages">
+	    {% for message in messages %}
+	    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+	    {% endfor %}
+	</ul>
+{% endif %}
+
+<h1> {{ person.chinese_name }},你可以</h1>
+	{% if perms.holiday.apply_reward %}
+	<a href="/apply_reward/">申请倒休</a>
+	<br>
+	<a href="/show_my_apply_reward/">查看我的倒休申请</a>
+	<br>
+	{% endif %}
+	{% if perms.holiday.apply_application %}
+	<a href="/apply_application/">使用我的倒休</a>
+	<br>
+	<a href="/apply_rollback/">取消倒休使用</a>
+	<br>
+	<a href="/show_my_info/">查看我的记录</a>
+	<br>
+	{% endif %}
+	{% if perms.holiday.approve %}
+	<a href="/approve_application/">审批倒休使用</a>
+	<br>
+	<a href="/approve_reward/">审批倒休申请</a>
+	<br>
+	<a href="/approve_rollback/">审批倒休申请</a>
+	<br>
+	<a href="/search_form/">搜索</a>
+	<br>
+	<a href="/accounts/changpass/">修改密码</a>
+	{% endif %}
+	
+	<p>以下链接为测试需要才显示，真实使用时，只会根据权限显示上面的链接，不会显示下面的</p>
+	<a href="/apply_reward/">申请倒休</a>
+	<br>
+	<a href="/show_my_apply_reward/">查看我的倒休申请</a>
+	<br>
+
+
+	<a href="/apply_application/">使用我的倒休</a>
+	<br>
+	<a href="/show_my_info/">查看我的记录</a>
+	<br>
+
+
+	<a href="/approve_application/">审批倒休使用</a>
+	<br>
+	<a href="/approve_reward/">审批倒休申请</a>
+	<br>
+	<a href="/search_form/">搜索</a>
+{% endblock %}

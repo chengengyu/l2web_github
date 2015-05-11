@@ -1,0 +1,289 @@
+
+
+body {
+    margin: 0px;
+    font-size: 17px;
+    font-family: "Lucida Grande","DejaVu Sans","Bitstream Vera Sans",Verdana,Arial,sans-serif;
+    background-color: #b5a789;
+    color:  #efe5d0;
+}
+
+/*tableContainer*/
+
+/*
+
+div#tableContainer {
+	border-spacing: 10px;
+	//display: table;
+}
+
+div#tableRow {
+	//display: table-row;
+}
+*/
+#main{
+	/*
+	display: table-cell;
+	background-color: #efe5d0;
+	width: 70%;
+	*/
+	
+	margin: 10px 10px 20px 0px;
+	vertical-align: top;
+	color: #954b4b;
+	
+}
+
+.welcome{
+	padding: 70px 0px 0px 0px;
+	text-align:center;
+}
+
+.errorlist{
+	color: #FF0000;
+}
+
+.errorlist{
+	margin-left:30px;
+}
+
+.search_error{
+	color: #FF0000;
+	margin-left:300px;
+}
+
+.footer{
+  background-color: #675c47;
+  color:            #efe5d0;
+  text-align:       center;
+  padding:          15px;
+  margin: 0px 10px 10px 10px;
+  font-size:        90%;
+  clear: both;
+}
+
+.footer a:link, .footer a:visited{
+    color: #efe5d0;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.footer a:hover {
+	  color: #efe5d0;
+    background-color: #c8b99c;
+}
+
+/* nav */
+
+.nav {
+	/*background-color: efe5d0;
+	display: table-cell;
+	*/
+	float: left;
+	margin: 10px 10px 10px 10px;
+	width: 200px;
+	vertical-align: top;
+}
+.nav ul {
+	background-color: #efe5d0;
+	margin: 0px;
+	padding: 0px 0px 0px 0px;
+}
+
+.nav ul li {
+  color: #954b4b;
+  display: block;
+	font-size: 1.2em;
+	padding: 10px 10px 10px 10px;
+	list-style-type:none
+	font-weight: bold;
+	margin: 0px;
+}
+
+.nav ul li a:link, .nav ul li a:visited {
+    color: #954b4b;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.nav ul li a:hover {
+	  color: #954b4b;
+    background-color: #c8b99c;
+}
+
+
+.nav #mortal{
+	border: solid;
+	color: #b5a789;
+	border-width: 0px 0px 15px 0px;
+	margin: 0px;
+}
+
+.nav #hero{
+	border: solid;
+	color: #b5a789;
+	border-width: 0px 0px 15px 0px;
+	margin: 0px;
+}
+
+.nav #titan{
+	border: solid;
+	color: #b5a789;
+	border-width: 0px 0px 0px 0px;
+	margin: 0px;
+}
+
+/* header */
+
+.header {
+	margin: 0px;
+}
+
+.header h1{
+	background: #675c47; /*url("../images/logo.png") no-repeat left;*/
+	text-align:center;
+	padding: 30px 10px 30px 10px;
+	color:  #efe5d0;
+	margin: 0px 10px 0px 10px;
+}
+
+
+/* login */
+.login{
+	text-align:center;
+	margin: auto;
+  border: 5px solid;
+  width: 18em;
+  /*min-width: 200px;*/
+  margin-top: 100px;
+  margin-bottom: 100px;
+}
+
+
+.login form {
+  /*display: table;*/
+  margin-top: 2em;
+}
+
+
+.login .form-row {
+	display: inline;
+	display: table-row;
+  text-align:center;
+  padding: 0px 2px 0px 2px;
+  width: 60%;
+    
+}
+
+.login .form-row label {
+	display: table-cell;
+  vertical-align: top;
+  text-align:right;
+  padding-left: 2em;
+  padding-right: 1em;
+  line-height: 2em;
+  font-size: 1em;
+  clear: both;
+  color: #333;
+}
+
+
+.login .form-row #id_username, .login .form-row #id_password {
+		
+  padding: 6px 2px 2px 2px;
+  width: 90%;
+}
+
+.login .submit-row {
+	text-align:center;
+  padding-top: 1em;
+  
+}
+
+/* table */
+
+fieldset.show_info, fieldset.approve_field{
+	border: 0px;
+}
+
+.show_my,.approve{
+	color: #954b4b;
+	border:  solid #954b4b;
+	border-collapse:  collapse;
+	margin: 0px 0px 20px 0px;
+}
+
+.show_my td, .show_my th, .approve td, .approve th{
+  border: solid gray;
+  padding: 5px;
+  table-layout:fixed;
+  word-break: break-all;
+}
+
+.show_my td, .show_my th{
+	width : 10%;
+}
+.show_my tr .text{
+  width : 20%;
+}
+
+
+.show_my th, .approve th {
+	color:  #efe5d0;
+  background-color: #675c47;
+}
+
+.show_my tr.odd, .approve tr.odd{
+	background-color: #efe5d0;
+}
+
+.approve td, .approve th{
+  width : 10%;
+}
+
+.approve td{
+  font-size : small;
+}
+
+.approve input{
+	font-size: 14px;
+	width : 80%;
+	padding : 0px;
+	margin : 0px;
+}
+
+.approve textarea{
+	width : 100%;
+	font-size: 14px;
+}
+
+.approve .num{
+	width : 6%;
+}
+
+.approve tr .text{
+	width : 25%;
+}
+
+.approve .check{
+	width : 2%;
+}
+
+.approve .name{
+	width : 5%;
+}
+
+.approve .type{
+	width : 8%;
+}
+
+/*
+input {
+	background: none;
+	border: none;
+}
+*/
+
+.welcomeTable {
+	margin:0px auto;
+}
