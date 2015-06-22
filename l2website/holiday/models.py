@@ -79,3 +79,6 @@ class ApplicationRollback(models.Model):
     
     def __str__(self):
         return u'%s' % self.apply_rollback.name
+
+class RewardDeadline(models.Model):
+    date = models.DateField(verbose_name="截至日期")

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from holiday.models import Person, Application, Reward, ApplicationRollback
+from holiday.models import Person, Application, Reward, ApplicationRollback, RewardDeadline
 # Register your models here.
 
 
@@ -26,8 +26,11 @@ class RollbackAdmin(admin.ModelAdmin):
     search_fields = ('apply_rollback__chinese_name', )
     list_filter = ('date_apply', 'apply_rollback__groupname')
 
+class RewardDeadlineAdmin(admin.ModelAdmin):
+    list_display = ('date', )
 
 admin.site.register(Person, PersonAdmin)
 admin.site.register(Application, ApplicationAdmin)
 admin.site.register(Reward, RewardAdmin)
 admin.site.register(ApplicationRollback, RollbackAdmin)
+admin.site.register(RewardDeadline, RewardDeadlineAdmin)

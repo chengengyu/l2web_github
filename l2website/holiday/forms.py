@@ -30,7 +30,7 @@ class RewardForm(ModelForm):
         try:
             self.cleaned_data['person'] = Person.objects.get(name=self.cleaned_data['applyname'])    
         except Person.DoesNotExist:
-            raise forms.ValidationError("查不到该同学")
+            raise forms.ValidationError("查不到该同事")
         return self.cleaned_data['applyname']
     
     def clean_days_apply(self):

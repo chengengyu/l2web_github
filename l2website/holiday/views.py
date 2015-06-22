@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_protect
-from holiday.models import Application, Reward, Person, ApplicationRollback
+from holiday.models import Application, Reward, Person, ApplicationRollback, RewardDeadline
 from holiday.forms import RewardForm, PersonForm, ApplicationForm, RollbackForm
 from django.forms.models import modelformset_factory
 from django.core.exceptions import ValidationError
@@ -28,6 +28,11 @@ def get_approve_mail_list():
 @login_required
 @permission_required('holiday.apply_reward', login_url="/no_permission/")
 def apply_reward(request):
+    datenow = datetime.date.today()
+    deadline = RewardDeadline.objects.get(id=1)
+    print(deadline.date)
+    if datenow > deadline.date:
+        return render(request, 'deadline.html', {'deadline': deadline, 'now': datenow})
     email_list = []
     if request.method == "POST":
         form = RewardForm(request.POST)
@@ -77,8 +82,9 @@ def approve_reward(request):
         if rewards and rewards.is_valid():
             for reward in rewards:
                 #如果审批通过则进行保存
-                if reward.cleaned_data['approve_flag'] == True:                    
-                    person = reward.cleaned_data['reward_reward']
+                if reward.cleaned_data['approve_flag'] == True:
+                    #每次都需要现查一下，保证是最新的信息，不然网页获取的信息是一个固定的，当同时审批同一个人的时候就会出问题
+                    person = Person.objects.get(name=reward.cleaned_data['reward_reward'].name)
                     person.holidayNum = person.holidayNum + reward.cleaned_data['days_approve']
                     person.holidayNumSum = person.holidayNumSum + reward.cleaned_data['days_approve']
                     reward.instance.approve_reward = person_approve
@@ -150,8 +156,8 @@ def approve_rollback(request):
         rollbacks = RollbackFormSet(request.POST)
         if rollbacks and rollbacks.is_valid():
             for rollback in rollbacks:
-                if rollback.cleaned_data['approve_flag'] == True:                    
-                    person = rollback.cleaned_data['apply_rollback']
+                if rollback.cleaned_data['approve_flag'] == True:
+                    person = Person.objects.get(name=rollback.cleaned_data['apply_rollback'].name)
                     person.holidayNum = person.holidayNum + rollback.cleaned_data['days_apply']
                     person.holidayNumUsed = person.holidayNumUsed - rollback.cleaned_data['days_apply']
                     rollback.instance.approve_rollback = person_approve
@@ -199,7 +205,7 @@ def show_my_apply_reward(request):
     return render(request, 'show_my_apply_reward.html', {'person': person,'rewards': rewards})
 
 '''
-倒休申请界面生成 
+倒休使用界面生成
 '''
 @csrf_protect
 @login_required
@@ -232,7 +238,7 @@ def apply_application(request):
 
 
 '''
-审批倒休申请界面生成
+审批倒休使用界面生成
 '''
 @csrf_protect
 @login_required
@@ -255,8 +261,8 @@ def approve_application(request):
         if applications:
             if applications.is_valid():
                 for application in applications:
-                    if application.cleaned_data['approve_flag'] == True:                    
-                        person = application.cleaned_data['apply_application']
+                    if application.cleaned_data['approve_flag'] == True:
+                        person = Person.objects.get(name=application.cleaned_data['apply_application'].name)
                         person.holidayNum = person.holidayNum - application.cleaned_data['days_approve']
                         person.holidayNumUsed = person.holidayNumUsed + application.cleaned_data['days_approve']
                         application.instance.approve_rollback = person_approve
