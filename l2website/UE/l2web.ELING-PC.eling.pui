@@ -1,10 +1,12 @@
 [Open Files]
 Active File Display Mode=3
-Active File Index=11
+Active File Index=12
 Open File Line0=2
 Open File Line1=2
 Open File Line10=2
-Open File Line11=700
+Open File Line11=4700
+Open File Line12=0
+Open File Line13=0
 Open File Line2=4118
 Open File Line3=2
 Open File Line4=2
@@ -16,7 +18,9 @@ Open File Line9=2
 Open File Pos0=1304
 Open File Pos1=394
 Open File Pos10=1820
-Open File Pos11=2956
+Open File Pos11=2082
+Open File Pos12=252
+Open File Pos13=103
 Open File Pos2=4144
 Open File Pos3=366
 Open File Pos4=3148
@@ -28,7 +32,9 @@ Open File Pos9=214
 Open File Window Pos0=0,1,-1,-1,-9,-36,0,632,300,790
 Open File Window Pos1=0,1,-1,-1,-9,-36,0,158,300,316
 Open File Window Pos10=0,1,-1,-1,-9,-36,150,150,1417,732
-Open File Window Pos11=2,3,-1,-1,-9,-36,180,180,1447,762
+Open File Window Pos11=0,1,-1,-1,-9,-36,180,180,1447,762
+Open File Window Pos12=2,3,-1,-1,-9,-36,90,90,1357,672
+Open File Window Pos13=0,1,-1,-1,-9,-36,120,120,1387,702
 Open File Window Pos2=0,1,-1,-1,-9,-36,120,120,544,689
 Open File Window Pos3=0,1,-1,-1,-9,-36,150,150,574,719
 Open File Window Pos4=0,1,-1,-1,-9,-36,210,210,634,779
@@ -41,7 +47,9 @@ Open File0=M:\Users\eling\workspace\Django\l2website\templates\base.html
 Open File1=M:\Users\eling\workspace\Django\l2website\templates\login_home.html
 Open File10=M:\Users\eling\workspace\Django\l2website\holiday\forms.py
 Open File11=M:\Users\eling\workspace\Django\l2website\holiday\export.py
-Open File12=
+Open File12=M:\Users\eling\workspace\Django\l2web_github\l2website\cmd.txt
+Open File13=M:\Users\eling\workspace\Django\l2web_github\l2website\manage.py
+Open File14=
 Open File2=M:\Users\eling\workspace\Django\l2website\static\css\base.css
 Open File3=M:\Users\eling\workspace\Django\l2website\templates\show_my_info.html
 Open File4=M:\Users\eling\workspace\Django\l2website\templates\approve_reward.html
@@ -58,7 +66,8 @@ Working Time=166657
 
 [Folders]
 ..\=1
+..\ - holiday=1
 ..\ - static - css=1
 ..\ - templates=1
 ..\ - templates - CSS=1
-..\ - holiday=1
+
